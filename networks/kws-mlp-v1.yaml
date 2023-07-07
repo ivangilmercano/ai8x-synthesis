@@ -1,0 +1,46 @@
+---
+# HWC (big data) configuration for KWS20v3
+
+arch: ai85kws20mlpv2
+dataset: KWS_20
+
+# Define layer parameters in order of the layer sequence
+layers:
+  # ReLU MLP - 6 layers
+  - activate: ReLU
+    out_offset: 0x2000
+    processors: 0xffffffffffffffff
+    output_processors: 0xffffffffffffffff
+    data_format: HWC
+    operation: MLP
+  - activate: ReLU
+    out_offset: 0x0000
+    processors: 0xffffffffffffffff
+    output_processors: 0xffffffffffffffff
+    operation: MLP
+  - activate: ReLU
+    out_offset: 0x2000
+    processors: 0xffffffffffffffff
+    output_processors: 0xffffffffffffffff
+    operation: MLP
+  - activate: ReLU
+    out_offset: 0x0000
+    processors: 0xffffffffffffffff
+    output_processors: 0xffffffffffffffff
+    operation: MLP
+  - activate: ReLU
+    out_offset: 0x2000
+    processors: 0xffffffffffffffff
+    output_processors: 0x00000000ffffffff
+    operation: MLP
+  - activate: ReLU
+    out_offset: 0x0000
+    processors: 0x00000000ffffffff
+    output_processors: 0x0000000001111111
+    operation: MLP
+  - flatten: true
+    out_offset: 0x2000
+    processors: 0x0000000001111111
+    operation: MLP
+    output_width: 32
+    activate: None
